@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Dashboard.View.AllQueriesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"   
+             xmlns:v="clr-namespace:Dashboard.View"
+             xmlns:b="clr-namespace:Dashboard.Behaviours"
+             xmlns:vm="clr-namespace:Dashboard.ViewModel"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300" Padding="5"  Opacity=".9">
+    <UserControl.DataContext>
+        <x:StaticExtension Member="vm:AllQueriesViewModel.Instance"></x:StaticExtension>
+    </UserControl.DataContext>    
+    <!--UserControl.Resources>
+        <CollectionViewSource x:Key="AllItemsGroups" Source="{Binding Path=AllItems}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="MachineName"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources-->
+    <ContentControl Style="{StaticResource caption_main}">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+            <v:QueryView DataContext="{Binding Path=SelectedItem}"/>
+            <!--ItemsControl ItemsSource="{Binding Source={StaticResource AllItemsGroups}}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label>test</Label>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl-->
+            <ListView x:Name="TaskDetailsList" DataContext="{Binding}" HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Path=AllItems}"
+                          IsSynchronizedWithCurrentItem="True" Background="Transparent"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="3" BorderThickness="0" >
+                <!--ListView.GroupStyle>
+                    <GroupStyle ContainerStyle="{StaticResource group_style}"/>
+                </ListView.GroupStyle-->
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn b:GridViewColumnResize.Width="Auto" Header="Description" DisplayMemberBinding="{Binding Path=Description}"/>
+                        <GridViewColumn b:GridViewColumnResize.Width="Auto" Header="Record Count" DisplayMemberBinding="{Binding Path=RecordCount}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </ContentControl>
+</UserControl>

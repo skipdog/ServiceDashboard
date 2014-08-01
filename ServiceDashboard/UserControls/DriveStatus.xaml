@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Dashboard.UserControls.DriveStatus"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="16" d:DesignWidth="300">
+    <UserControl.Resources>
+        <LinearGradientBrush x:Key="yellow" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF6E6E00" Offset="1.0"/>
+            <GradientStop Color="#FFFFFF88" Offset="0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="green" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF023501" Offset="1.0"/>
+            <GradientStop Color="#FFB6F9B4" Offset="0"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="red" EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF6E0000" Offset="1.0"/>
+            <GradientStop Color="#FFFD8C8C" Offset="0"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    <Grid>
+        <Rectangle Stroke="#FF000000" RenderTransformOrigin="0.5,0.5" x:Name="ProgressBarBackground">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="Gray" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Rectangle Stroke="#FF000000" RenderTransformOrigin="0.5,0.5"
+            x:Name="ProgressBarForeground" HorizontalAlignment="Left">
+            <Rectangle.Style>
+                <Style TargetType="Rectangle">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=ColorIndex, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Value="0">
+                            <Setter Property="Fill" Value="{StaticResource green}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ColorIndex, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Value="1">
+                            <Setter Property="Fill" Value="{StaticResource yellow}"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=ColorIndex, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Value="2">
+                            <Setter Property="Fill" Value="{StaticResource red}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Rectangle.Style>
+        </Rectangle>
+        <Viewbox>
+            <TextBlock TextAlignment="Center" Background="Transparent" FontFamily="Times"
+	            Foreground="Black" x:Name="ProgressText" Margin="2,2,2,2"> 0%
+            </TextBlock>
+        </Viewbox>
+    </Grid>
+</UserControl>

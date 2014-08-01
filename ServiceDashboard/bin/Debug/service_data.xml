@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ArrayOfModelService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ModelService>
+    <MachineName>CRCICTDEV</MachineName>
+    <ServiceName>IBG_gds_db</ServiceName>
+    <Description>IBG</Description>
+    <AlertStatus>STOPPED</AlertStatus>
+  </ModelService>
+</ArrayOfModelService>

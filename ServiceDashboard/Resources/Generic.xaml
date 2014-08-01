@@ -1,0 +1,26 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:tr="clr-namespace:Dashboard.Translations"
+    xmlns:vm="clr-namespace:Dashboard.ViewModel"
+    xmlns:vw="clr-namespace:Dashboard.View"
+    >
+   
+    <BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+    <tr:AlertColorConverter x:Key="AlertColorConverter" />
+    <tr:ViewPortConverter x:Key="ViewPortConverter" />
+    
+    <Style x:Key="ThemeMenuItemStyle" TargetType="MenuItem">
+        <Setter Property="Header" Value="{Binding DisplayName}"/>
+        <Setter Property="Command" Value="{Binding Command}"/>
+        <Setter Property="IsChecked" Value="{Binding IsChecked}" />
+        <Setter Property="IsCheckable" Value="{Binding IsCheckable}" />
+    </Style>
+    
+    <DataTemplate x:Key="CommandsTemplate">
+        <Menu IsTabStop="False" ItemsSource="{Binding}" Margin="6,2" Style="{DynamicResource menu_bar}"
+              ItemContainerStyle="{StaticResource ThemeMenuItemStyle}">
+        </Menu>
+    </DataTemplate>
+
+</ResourceDictionary>

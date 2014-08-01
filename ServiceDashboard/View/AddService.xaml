@@ -1,0 +1,25 @@
+﻿<Window x:Class="Dashboard.AddService"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Dashboard"
+        Title="Add Service" Height="300" Width="300" Style="{StaticResource window_dialog}">
+    <local:DataInputPanel Caption="Add Service" OnCancelClicked="DataInputPanel_OnCancelClicked"
+                            OnSaveClicked="DataInputPanel_OnSaveClicked">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label>Server:</Label>
+            <TextBox Grid.Column="1" x:Name="tbServerName" Width="100" KeyDown="tbServerName_KeyDown"></TextBox>
+            <Label Grid.Row="1">Service Name:</Label>
+            <ComboBox Grid.Row="1" Grid.Column="1" x:Name="cmbServiceName" ItemsSource="{Binding FullServiceList}"></ComboBox>
+        </Grid>
+    </local:DataInputPanel>
+</Window>

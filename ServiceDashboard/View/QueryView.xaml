@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="Dashboard.View.QueryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Visibility="{Binding Path=IsAdding, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
+    <ContentControl Style="{StaticResource data_entry}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="_Description:" Margin="3" Target="{Binding ElementName=tbDescription}"/>
+
+            <TextBox x:Name="tbDescription" Margin="3" CharacterCasing="Upper" Grid.Column="1" Width="100" Text="{Binding Path=Description, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Column="2" Margin="3" Width="Auto" Content="{Binding ElementName=tbDescription, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Grid.Row="1" Margin="3" Content="_Query:" Target="{Binding ElementName=tbQuery}"/>
+
+            <TextBox x:Name="tbQuery" Margin="3" CharacterCasing="Normal" Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding Path=Query, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="1" Grid.Column="2" Margin="3" Content="{Binding ElementName=tbQuery, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Content="_ConnectionString:" Margin="3" Grid.Row="2" Target="{Binding ElementName=tbConnectionString}"/>
+
+            <TextBox x:Name="tbConnectionString" Grid.Row="2" Margin="3" Grid.Column="1" Width="100" Text="{Binding Path=ConnectionString, ValidatesOnDataErrors=True,
+                UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="2" Grid.Column="2" Margin="3" Content="{Binding ElementName=tbConnectionString, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Content="_QueryInterval:" Margin="3" Grid.Row="3" Target="{Binding ElementName=tbQueryInterval}"/>
+            
+            <TextBox x:Name="tbQueryInterval" CharacterCasing="Normal" Margin="3" Grid.Column="1" Grid.Row="3" Width="100" Text="{Binding Path=QueryInterval, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="3" Grid.Column="2" Margin="3" Content="{Binding ElementName=tbQueryInterval, Path=(Validation.Errors).CurrentItem}"/>
+
+        </Grid>
+    </ContentControl>
+</UserControl>

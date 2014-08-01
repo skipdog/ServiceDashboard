@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="Dashboard.View.TaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Visibility="{Binding Path=IsAdding, Converter={StaticResource VisibilityConverter}, FallbackValue=Collapsed}">
+    <ContentControl Style="{StaticResource data_entry}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="_Server Name:" Margin="3" Target="{Binding ElementName=tbServerName}"/>
+
+            <TextBox x:Name="tbServerName" CharacterCasing="Upper" Margin="3" Grid.Column="1" Width="100" Text="{Binding Path=MachineName, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}"/>
+
+            <ContentPresenter Grid.Column="2" Margin="3" Content="{Binding ElementName=tbServerName, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Content="_User Name:" Margin="3" Grid.Row="1" Target="{Binding ElementName=tbUserName}"/>
+
+            <TextBox x:Name="tbUserName" Margin="3" Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding Path=UserName, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Label Content="_Password:" Grid.Row="2" Margin="3" Target="{Binding ElementName=tbPassword}"/>
+
+            <TextBox x:Name="tbPassword" Margin="3" Grid.Row="2" Grid.Column="1" Width="100" Text="{Binding Path=Password, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="2" Grid.Column="2" Margin="3" Content="{Binding ElementName=tbPassword, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Grid.Row="3" Margin="3" Content="_Task:" Target="{Binding ElementName=tbTaskName}"/>
+
+            <ComboBox x:Name="cmbTaskName" Margin="3" Grid.Row="3" Grid.Column="1" Width="100" ItemsSource="{Binding Path=TaskNameList}" 
+                      SelectedItem="{Binding Path=TaskName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="3" Grid.Column="2" Margin="3" Content="{Binding ElementName=cmbTaskName, Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Content="_Description:" Grid.Row="4" Margin="3" Target="{Binding ElementName=tbDescription}"/>
+
+            <TextBox x:Name="tbDescription" Margin="3" Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding Path=Description, 
+                    ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ContentPresenter Grid.Row="4" Grid.Column="2" Margin="3" Content="{Binding ElementName=tbDescription, 
+                    Path=(Validation.Errors).CurrentItem}"/>
+
+            <Label Content="_Alert Status:" Grid.Row="5" Margin="3" Target="{Binding ElementName=tbAlertStatus}"/>
+
+            <TextBox x:Name="tbAlertStatus" CharacterCasing="Upper" Margin="3" Grid.Column="1" Grid.Row="5" Width="100" Text="{Binding Path=AlertStatus, 
+                    UpdateSourceTrigger=PropertyChanged}"/>
+
+        </Grid>
+    </ContentControl>
+</UserControl>

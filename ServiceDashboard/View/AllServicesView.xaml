@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Dashboard.View.AllServicesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:v="clr-namespace:Dashboard.View"
+             xmlns:b="clr-namespace:Dashboard.Behaviours"
+             xmlns:vm="clr-namespace:Dashboard.ViewModel"
+             mc:Ignorable="d" Opacity=".9"
+             d:DesignHeight="300" d:DesignWidth="300" Padding="5">
+    <UserControl.DataContext>
+        <x:StaticExtension Member="vm:AllServicesViewModel.Instance"></x:StaticExtension>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="AllItemsGroups" Source="{Binding Path=AllItems}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="MachineName"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <ContentControl Style="{StaticResource caption_main}">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+            <v:ServiceView DataContext="{Binding Path=SelectedItem}"/>
+            <ListView x:Name="ServiceDetailsList" DataContext="{Binding}" 
+                      HorizontalAlignment="Stretch"
+                      ItemsSource="{Binding Source={StaticResource AllItemsGroups}}"
+                          IsSynchronizedWithCurrentItem="True" Background="Transparent"
+                          SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Margin="3" BorderThickness="0" >
+                <ListView.GroupStyle>
+                    <GroupStyle ContainerStyle="{StaticResource group_style}"/>
+                </ListView.GroupStyle>
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Start" Command="{Binding Path=ServiceStartCommand}" />
+                        <MenuItem Header="Stop" Command="{Binding Path=ServiceStopCommand}" />
+                        <MenuItem Header="Restart" Command="{Binding Path=ServiceRestartCommand}" />
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>                    
+                    <GridView>
+                        <GridViewColumn b:GridViewColumnResize.Width="Auto" Header="Description" DisplayMemberBinding="{Binding Path=Description}"/>
+                        <GridViewColumn b:GridViewColumnResize.Width="Auto" Header="Service Status">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Label Content="{Binding Path=ServiceStatus}" Foreground="{Binding IsOnAlert, Converter={StaticResource AlertColorConverter}}"/>                                    
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </ContentControl>    
+</UserControl>

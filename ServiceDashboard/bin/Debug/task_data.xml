@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ArrayOfModelTask xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ModelTask>
+    <MachineName>CRCICTDEV</MachineName>
+    <TaskName>FusePumpDaily</TaskName>
+    <Description>FusePumpDaily</Description>
+    <AlertStatus>STOPPED</AlertStatus>
+  </ModelTask>
+</ArrayOfModelTask>
